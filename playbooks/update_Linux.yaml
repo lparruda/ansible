@@ -1,0 +1,22 @@
+---
+- name: Atualizar máquinas Ubuntu e Red Hat
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Atualizar cache de pacotes no Ubuntu
+      apt:
+        update_cache: "yes" # Entre "" para evitar o aviso warning
+      when: ansible_os_family == 'Debian'
+
+    - name: Atualizar pacotes no Ubuntu
+      apt:
+        upgrade: "yes" # Entre "" para evitar o aviso warning
+      when: ansible_os_family == 'Debian'
+
+    - name: Atualizar pacotes no Red Hat
+      yum:
+        name: "*"
+        state: latest
+      when: ansible_os_family == 'RedHat'
+...
