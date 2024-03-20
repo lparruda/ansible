@@ -1,0 +1,23 @@
+---
+- name: Update RedHat (when)
+  hosts: all
+  become: true
+  tasks:
+   - name: DNF | Update System
+     ansible.builtin.dnf:
+       name: "*"
+       state: latest
+       update_cache: yes
+     when: ansible_distribution == "RedHat"
+
+   - name: APT | Update cache
+     ansible.builtin.apt:
+       update_cache: yes
+     when: ansible_distribution == "Ubuntu"
+
+   - name: APT | Update System
+     ansible.builtin.apt: name="*" state=latest
+     when: ansible_distribution == "Ubuntu"
+
+...
+

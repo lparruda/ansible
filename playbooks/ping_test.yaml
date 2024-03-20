@@ -1,0 +1,7 @@
+---
+- name: Testar conectividade com os hosts
+  hosts: all
+  tasks:
+    - name: Executar ping
+      ping:
+...

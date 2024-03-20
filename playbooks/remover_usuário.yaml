@@ -1,0 +1,21 @@
+---
+- name: Remover usuário e diretório home
+  hosts: all
+  become: yes  # Executar com privilégios de superusuário
+
+  vars:
+    usuario_a_remover: teste
+
+  tasks:
+    - name: Remover usuário
+      user:
+        name: "{{ usuario_a_remover }}"
+        state: absent
+      become: yes
+
+    - name: Remover diretório home
+      file:
+        path: "/home/{{ usuario_a_remover }}"
+        state: absent
+      become: yes
+...

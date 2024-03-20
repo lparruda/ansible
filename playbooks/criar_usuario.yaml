@@ -1,0 +1,18 @@
+---
+- name: Criar usuário com senha e diretório home
+  hosts: all
+  become: yes  # Executar com privilégios de superusuário
+
+  vars:
+    novo_usuario: teste
+    senha_criptografada: "{{ '1234' | password_hash('sha512', 'mysecretsalt') }}"
+    criar_diretorio_home: yes
+
+  tasks:
+    - name: Adicionar usuário
+      user:
+        name: "{{ novo_usuario }}"
+        password: "{{ senha_criptografada }}"
+        createhome: "{{ criar_diretorio_home }}"
+      become: yes
+...
