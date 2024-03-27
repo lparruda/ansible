@@ -16,7 +16,6 @@ ansible 10.1.0.13 -m yum -a "name=* state=latest" -b -K -u lroot
 Latest para aplicar
 Absent para removervim 
 
-
 Criando usuários:
 ansible all -i hosts -u pereira -b -m user -a "name=teste state=present password=teste123"
 Removendo usuários:
